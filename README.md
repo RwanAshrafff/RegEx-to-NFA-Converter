@@ -3,7 +3,19 @@
 A web-based tool that parses a regex and visualizes its equivalent NFA.
 
 ## Project Structure
-
+regex-to-nfa-converter/ 
+│ ├── 📁 src/
+      │ ├── parser/ # Code for infix → postfix 
+      │ ├── nfa/ # Thompson's construction code 
+      │ ├── ui/ # HTML, CSS, JS frontend 
+      │ ├── main.js # Entry point or integration logic 
+│ ├── 📁 public/
+      │ ├── nfa_examples.json # Sample regex and expected outputs 
+│ ├── 📁 report/
+      │ ├── Project_Report.pdf # Final report (to be added later) 
+      │ ├── README.md # Project description + instructions 
+├── .gitignore # Files to ignore in version control 
+├── LICENSE # Open-source license if needed
 
 ## Features
 
