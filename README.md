@@ -2,8 +2,9 @@
 
 A web-based tool that parses a regex and visualizes its equivalent NFA.
 
-## Project Structure
-![Uploading image.png…]()
+## 📁 Full Project Directory Structure
+
+![Project Folder Structure](./image.png)
 
 
 ## Features
