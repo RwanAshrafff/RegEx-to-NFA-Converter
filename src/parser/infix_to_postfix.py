@@ -1,3 +1,12 @@
+
+import re
+
+def validate_regex(expr):
+    # Allow only: a-z A-Z 0-9 | * + ? ( ) and whitespace
+    pattern = r"^[a-zA-Z0-9|*+?.() ]*$"
+    if not re.fullmatch(pattern, expr):
+        raise ValueError("❌ Invalid characters in regex. Allowed: a-z, A-Z, 0-9, |, *, +, ?, ., (, )")
+    
 def precedence(c):
     if c == '*':
         return 3
@@ -25,11 +34,9 @@ def insert_concat_operators(regex):
     return result
 
 def infix_to_postfix(expr):
+    validate_regex(expr)
     op_stack = []
     postfix = ""
-
-    # Replace '+' with '|' for union
-    expr = expr.replace('+', '|')
 
     for c in expr:
         if c == ' ':
