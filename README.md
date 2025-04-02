@@ -10,57 +10,81 @@ A simple web-based tool that parses regular expressions (regex) and visualizes t
 
 ---
 
-## 🧠 Regex Parser (C++)
+🧠 Regex Parser (Python)
+We implemented the infix ➤ postfix conversion using the Shunting Yard Algorithm, with automatic insertion of explicit concatenation (.) operators.
 
-We implemented the **regex parsing step** in C++ using the Shunting Yard algorithm to convert infix expressions to postfix. This step prepares the expression for further processing into an NFA.
+📄 Code Location:
+parser/infix_to_postfix.py
 
-📄 **Code Location**:  
-`src/parser/infix_to_postfix.cpp`
+✅ Features:
+Supports grouping, union (| or +), Kleene star (*), one-or-more (+), and optional (?)
 
-### ✅ Key Features:
-- Inserts explicit concatenation operators (`.`) where needed
-- Supports:
-  - Grouping with `()`
-  - Union using `|` or `+`
-  - Kleene Star `*`
-- Normalizes user-friendly syntax (e.g., converts `+` to `|`)
-- Clean, testable output ready for Thompson’s Construction
+Automatically adds . between implicitly concatenated tokens
 
-### 🔄 Planned Enhancements:
-- Expand character ranges like `[0-9]` into `(0|1|...|9)`
-- Translate `A+` into `A.A*` (one or more)
-- Translate `A?` into `(A|ε)` (optional)
+Converts + to | for union (internally normalized)
 
-### 🔢 Example:
-Input: a(b|c)* Parsed: a.(b|c)* Postfix: a b c | * .
+Clean postfix output ready for NFA generation
+
+🔧 NFA Generator (Thompson’s Construction)
+We use Thompson’s Construction to build an NFA from the postfix expression.
+
+📄 Code Location:
+nfa/thompson.py
+
+✅ Supports:
+Basic characters (a–z, A–Z, 0–9)
+
+Kleene Star (*)
+
+Union (|)
+
+Concatenation (.)
+
+One or more (+)
+
+Optional (?)
+
+The output is a linked structure of state() objects representing transitions with or without ε.
+
+🔁 Integration
+In main.py, we connect everything:
+
+✅ Get user input
+
+✅ Insert explicit concatenation
+
+✅ Convert to postfix
+
+✅ Build NFA using Thompson’s Construction
+
+✅ (Optional) Visualize using networkx (planned)
+
+🧪 Example:
+text
+Copy
+Edit
+Input:     a + (b * c - (d / e ^ f) * g) * h
+Parsed:    a + (b * c . - (d / e ^ f) * g) * h
+Postfix:   a b c * . d e / f ^ . g * - . h * . |
+✅ NFA built successfully.
+
+💡 Next Steps
+ Add NFA visualization using networkx or graphviz
+
+ Support character ranges like [0-9]
+
+ Add frontend to accept input and render visual graph (1-page interface)
+
+💻 Tech Stack (Python-Based)
+Purpose	Tool/Library
+Regex Parsing	Python + custom logic
+NFA Construction	Python (OOP with states)
+Visualization	networkx, matplotlib (planned)
+Web frontend	HTML/CSS/JS (planned)
+👥 Team
+Add your names & IDs here
+
+📜 License
+MIT License (or any license of your choice)
 
 
----
-
-## ✨ Features Overview
-
-- Parses regular expressions with support for:
-  - Union (`|`)
-  - Concatenation (`.`)
-  - Kleene Star (`*`)
-- Converts infix to postfix for easier NFA construction
-- Generates NFAs using Thompson’s Construction algorithm
-- Visually displays the NFA graph in a clean one-page web interface
-
----
-
-## 💻 Tech Stack
-
-- HTML, CSS, JavaScript
-- Visualization: [Cytoscape.js](https://js.cytoscape.org/) or [D3.js](https://d3js.org/)
-- Core logic (parser/NFA builder): C++ and/or JavaScript
-
----
-
-## 📜 License
-
-MIT License (or your preferred open-source license)
-
----
-
-Let me know if you want to include your team members or usage instructions next!
