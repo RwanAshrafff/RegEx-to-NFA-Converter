@@ -1,7 +1,3 @@
-Here’s your updated `README.md` reflecting everything you’ve accomplished so far:
-
----
-
 # 🎯 RegEx-to-NFA-Converter (Python Version)
 
 A simple, educational tool that **parses regular expressions (regex)** and visualizes their equivalent **Non-deterministic Finite Automata (NFA)** using **Thompson’s Construction** — now entirely in **Python**.
@@ -117,5 +113,3 @@ Postfix:   a b c * . d e / f ^ . g * - . h * . |
 MIT License (or any license of your choice)
 
 ---
-
-Let me know if you want this as a markdown file or want to auto-generate the team/report section too!
