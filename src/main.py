@@ -1,5 +1,6 @@
 from parser.infix_to_postfix import insert_concat_operators, infix_to_postfix
 from nfa.Thompson_Converter import compile
+from visualizer.draw_nfa import draw_nfa
 
 if __name__ == "__main__":
     try:
@@ -12,6 +13,7 @@ if __name__ == "__main__":
         print("Postfix Expression:", postfix)
 
         result_nfa = compile(postfix)
+        draw_nfa(result_nfa)
         print("\n✅ NFA built successfully.")
         
     except ValueError as ve:
