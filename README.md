@@ -6,25 +6,32 @@ A simple, educational tool that **parses regular expressions (regex)** and visua
 
 ## 📁 Project Directory Structure
 
-![Project Folder Structure](./image.png)
-
-### Folder Layout:
-
 ```
-regex_to_nfa_project/
-├── parser/                 ← infix ➤ postfix conversion logic
-│   └── infix_to_postfix.py
+REGEX-TO-NFA-CONVERTER/
 │
-├── nfa/                    ← Thompson’s Construction algorithm
-│   └── Thompson_Converter.py
+├── public/
+│   └── nfa_examples.json            # (Optional) Predefined NFA test cases
 │
-├── visualizer/             ← NFA graph visualizer (Graphviz-based)
-│   └── draw_nfa.py
+├── src/
+│   ├── nfa/
+│   │   ├── __init__.py
+│   │   └── Thompson_Converter.py    # NFA builder (Thompson’s construction)
+│   │
+│   ├── parser/
+│   │   ├── __init__.py
+│   │   └── infix_to_postfix.py      # Regex parser (infix ➤ postfix)
+│   │
+│   ├── ui/
+│   │   └── visualizer/
+│   │       └── draw_nfa.py          # Graphviz-based visualizer
 │
-├── main.py                 ← Main script to connect everything
+├── main.py                          # Main entry point to run the pipeline
+├── nfa_graph.png                    # Output visualization (generated)
+├── image.png                        # (Optional) Project diagram
+├── .gitignore
+├── LICENSE
+└── README.md
 ```
-
----
 
 ## 🔄 What This Project Does
 
