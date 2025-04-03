@@ -1,6 +1,6 @@
 # 🎯 RegEx-to-NFA-Converter (Python Version)
 
-A simple, educational tool that **parses regular expressions (regex)** and visualizes their equivalent **Non-deterministic Finite Automata (NFA)** using **Thompson’s Construction** — now entirely in **Python**.
+A simple, educational tool that **parses regular expressions (regex)** and visualizes their equivalent **Non-deterministic Finite Automata (NFA)** using **Thompson’s Construction** — implemented entirely in **Python**.
 
 ---
 
@@ -8,108 +8,152 @@ A simple, educational tool that **parses regular expressions (regex)** and visua
 
 ![Project Folder Structure](./image.png)
 
-### Project Layout (Python Version):
+### Folder Layout:
+
 ```
 regex_to_nfa_project/
-├── parser/             ← infix ➤ postfix conversion
+├── parser/                 ← infix ➤ postfix conversion logic
 │   └── infix_to_postfix.py
 │
-├── nfa/                ← Thompson's construction
-│   └── thompson.py
+├── nfa/                    ← Thompson’s Construction algorithm
+│   └── Thompson_Converter.py
 │
-├── visualizer/         ← (Optional) graph drawing with networkx/matplotlib
+├── visualizer/             ← NFA graph visualizer (Graphviz-based)
 │   └── draw_nfa.py
 │
-├── main.py             ← user input, conversion pipeline
+├── main.py                 ← Main script to connect everything
 ```
 
 ---
 
-## 🧠 Regex Parser (Python)
+## 🔄 What This Project Does
 
-We implemented the **infix ➤ postfix** conversion using the **Shunting Yard Algorithm**, with automatic insertion of explicit concatenation (`.`) operators.
+### ✅ Full Conversion Pipeline:
 
-📄 **Code Location**:  
-`parser/infix_to_postfix.py`
-
-### ✅ Features:
-- Supports grouping, union (`|` or `+`), Kleene star (`*`), one-or-more (`+`), and optional (`?`)
-- Automatically adds `.` between implicitly concatenated tokens
-- Converts `+` to `|` for union (internally normalized)
-- Clean postfix output ready for NFA generation
+1. **Input a regex**
+2. ➤ Insert concatenation (`.`) where needed
+3. ➤ Convert **infix ➤ postfix** (Shunting Yard)
+4. ➤ Generate NFA using **Thompson’s Construction**
+5. ➤ Visualize the NFA as a graph with states & transitions
 
 ---
 
-## 🔧 NFA Generator (Thompson’s Construction)
+## 🧠 Regex Parsing (Python)
 
-We use **Thompson’s Construction** to build an NFA from the postfix expression.
+📄 `parser/infix_to_postfix.py`
 
-📄 **Code Location**:  
-`nfa/thompson.py`
-
-### ✅ Supports:
-- Basic characters (a–z, A–Z, 0–9)
-- Kleene Star (`*`)
-- Union (`|`)
-- Concatenation (`.`)
-- One or more (`+`)
-- Optional (`?`)
-
-> The output is a linked structure of `state()` objects representing transitions with or without ε.
+- Inserts explicit `.` for concatenation
+- Converts user-friendly syntax to machine-friendly postfix
+- Supports:
+  - Grouping `()`
+  - Union `|` or `+`
+  - Kleene Star `*`
+  - Optional `?`
+  - One or more `+`
 
 ---
 
-## 🔁 Integration
+## 🧱 NFA Construction (Thompson’s Algorithm)
 
-In `main.py`, we connect everything:
+📄 `nfa/Thompson_Converter.py`
 
-1. ✅ Get user input
-2. ✅ Insert explicit concatenation
-3. ✅ Convert to postfix
-4. ✅ Build NFA using Thompson’s Construction
-5. ✅ (Optional) Visualize using `networkx` (planned)
+- Builds an NFA from the postfix expression
+- Represents each state with a `label`, `edge1`, and `edge2`
+- All transitions support epsilon `ε` where needed
 
 ---
 
-## 🧪 Example:
+## 🖼 NFA Graph Visualization
 
-```text
-Input:     a + (b * c - (d / e ^ f) * g) * h
-Parsed:    a + (b * c . - (d / e ^ f) * g) * h
-Postfix:   a b c * . d e / f ^ . g * - . h * . |
-```
+📄 `visualizer/draw_nfa.py`
 
-✅ NFA built successfully.
+We use `graphviz` to visually draw your NFA with:
+- Labeled transitions (`a`, `b`, or `ε`)
+- Directed arrows between states
+- Start and Accept states clearly highlighted
 
----
+### ✅ Example Graph
 
-## 💡 Next Steps
-
-- [ ] Add NFA visualization using `networkx` or `graphviz`
-- [ ] Support character ranges like `[0-9]`
-- [ ] Add frontend to accept input and render visual graph (1-page interface)
+- Start ➝ `a` ➝ `b` ➝ Accept
+- Loops for `a*`, branches for `a|b`, etc.
 
 ---
 
-## 💻 Tech Stack (Python-Based)
+## 💻 Tech Stack
 
-| Purpose           | Tool/Library              |
+| Component        | Tool/Library              |
 |------------------|---------------------------|
-| Regex Parsing     | Python + custom logic     |
-| NFA Construction  | Python (OOP with states)  |
-| Visualization     | `networkx`, `matplotlib` *(planned)* |
-| Web frontend      | HTML/CSS/JS *(planned)*   |
+| Regex Parsing     | Custom Python logic       |
+| NFA Generation    | Thompson’s Algorithm in Python |
+| Graph Visualization | `graphviz` (via Python package) |
+| CLI Interface     | Python's built-in `input()` |
+| (Planned) Web UI  | HTML, JS, Cytoscape.js or D3.js |
 
 ---
 
-## 👥 Team
+## 🧪 Example Input
 
-> Add your names & IDs here
+```
+Regex: a(b|c)*d
+Prepared Infix: a.(b|c)*.d
+Postfix: a b c | * . d .
+```
+
+✅ You’ll see a visual NFA graph open with correct transitions and layout!
+
+---
+
+## 📦 Installation & Setup
+
+### 1. Clone the Project
+
+```bash
+git clone https://github.com/your-username/regex-to-nfa-converter.git
+cd regex-to-nfa-converter
+```
+
+### 2. Install Python Libraries
+
+```bash
+pip install graphviz
+```
+
+### 3. (Important) Install Graphviz System Package
+
+- **Windows:** Download from https://graphviz.org/download/
+- **Linux:** `sudo apt install graphviz`
+- **macOS:** `brew install graphviz`
+
+> ✅ Be sure to add Graphviz’s `bin/` to your system PATH so `.render()` works
+
+---
+
+## ▶️ How to Run
+
+```bash
+python main.py
+```
+
+Then input any regex like:
+
+```
+a(b|c)*d
+```
+
+📸 The program will:
+- Print prepared and postfix form
+- Show a visual **NFA graph**
 
 ---
 
 ## 📜 License
 
-MIT License (or any license of your choice)
+MIT License (or your preferred one)
+
+---
+
+## 👥 Team
+
+> Add your names and student IDs here
 
 ---
