@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex to NFA/DFA Converter</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Regex to NFA/DFA Converter</h1>
+        </header>
+        
+        <main>
+            <section class="input-section">
+                <form id="converter-form">
+                    <div class="input-group">
+                        <input type="text" id="regex-input" placeholder="Enter regular expression (e.g., a(b|c)*)" required>
+                        <button type="submit">Convert</button>
+                    </div>
+                </form>
+                <div id="error-message" class="error-message"></div>
+            </section>
+
+            <section id="results-section" class="results-section hidden">
+                <div class="processing-steps">
+                    <h2>Processing Steps</h2>
+                    <div class="steps-container">
+                        <div class="step">
+                            <label>Input Regex:</label>
+                            <code id="input-regex"></code>
+                        </div>
+                        <div class="step">
+                            <label>Prepared Infix:</label>
+                            <code id="prepared-infix"></code>
+                        </div>
+                        <div class="step">
+                            <label>Postfix Notation:</label>
+                            <code id="postfix-notation"></code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nfa-section">
+                    <h2>NFA Information</h2>
+                    <div class="info-card">
+                        <h3>Description</h3>
+                        <div id="nfa-description" class="description-content"></div>
+                    </div>
+                    <div class="info-card">
+                        <h3>Transition Table of NFA</h3>
+                        <div id="transition-table" class="table-container"></div>
+                    </div>
+                </div>
+
+                <div class="visualization-section">
+                    <h2>Visualizations</h2>
+                    <div class="graphs-container">
+                        <div class="graph-card">
+                            <h3>NFA Diagram</h3>
+                            <div id="nfa-graph-container" class="graph-container"></div>
+                        </div>
+                        <div class="graph-card">
+                            <h3>DFA Diagram</h3>
+                            <div id="dfa-graph-container" class="graph-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

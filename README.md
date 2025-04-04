@@ -25,11 +25,19 @@ REGEX-TO-NFA-CONVERTER/
 │   │   ├── __init__.py
 │   │   └── DFA_Converter.py
 │   │
-│   ├── visualizer/                      # Visual rendering using Graphviz
-│   │   ├── draw_nfa.py
-│   │   └── draw_dfa.py
+│   ├── visualizer/
+│   ├── static/
+│   │   ├── css/
+│   │   │   └── style.css
+│   │   ├── js/
+│   │   │   └── app.js
+│   │   └── graphs/
+│   ├── templates/
+│   │   └── index.html
+│   ├── draw_nfa.py
+│   ├── draw_dfa.py
 │
-├── main.py                              # Entry point (regex ➤ NFA ➤ DFA ➤ visualization)
+├── app.py                              # Entry point (regex ➤ NFA ➤ DFA ➤ visualization)
 ├── nfa_graph/                           # Folder auto-created to save graphs
 ├── LICENSE
 ├── image.png                            # Optional project diagram
