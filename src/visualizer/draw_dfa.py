@@ -1,7 +1,7 @@
 import graphviz
 from collections import deque
 
-def draw_dfa(dfa):
+def draw_dfa(dfa, filename='dfa_graph'):
     dot = graphviz.Digraph('DFA')
     dot.attr(rankdir='LR')
     
@@ -51,5 +51,4 @@ def draw_dfa(dfa):
     print("DFA graph saved as 'dfa_graph'")
     
     # Also render as PNG for visualization
-    dot.render('dfa_graph', format='png', cleanup=True)
-    print("DFA visualization saved as 'dfa_graph.png'") 
+    dot.render(filename, format='png', view=True, cleanup=True)  # Will open the image
