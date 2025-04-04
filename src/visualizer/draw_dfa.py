@@ -51,5 +51,4 @@ def draw_dfa(dfa):
     print("DFA graph saved as 'dfa_graph'")
     
     # Also render as PNG for visualization
-    dot.render('dfa_graph', format='png', cleanup=True)
-    print("DFA visualization saved as 'dfa_graph.png'") 
+    dot.render('dfa_graph', format='png', view=True, cleanup=True)
