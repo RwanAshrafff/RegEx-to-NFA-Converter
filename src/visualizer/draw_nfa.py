@@ -1,7 +1,7 @@
 # Digraph is used to create a directed graph
 from graphviz import Digraph
 
-def draw_nfa(nfa):
+def draw_nfa(nfa, filename='nfa_graph'):
     # the object dot shayel el visualization bta3 el graph and the format of the file zy mna 3ayza 
     dot = Digraph(format='png')
     dot.attr(rankdir='LR')  # graph layout direction from left-to-right
@@ -49,4 +49,4 @@ def draw_nfa(nfa):
     dot.edge('start', get_id(nfa.initial), label='start')
 
     # Show diagram
-    dot.render('nfa_graph', view=True)  # Will open the image
+    dot.render(filename, view=True)  # Will open the image
