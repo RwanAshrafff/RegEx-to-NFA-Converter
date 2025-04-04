@@ -1,6 +1,6 @@
 # 🎯 RegEx-to-NFA-Converter (Python Version)
 
-A simple, educational tool that **parses regular expressions (regex)** and visualizes their equivalent **Non-deterministic Finite Automata (NFA)** using **Thompson’s Construction** — implemented entirely in **Python**.
+A powerful tool that **parses regular expressions (regex)** and visualizes their equivalent **Non-deterministic Finite Automata (NFA)** using **Thompson’s Construction**, and then optionally converts and displays the equivalent **Deterministic Finite Automata (DFA)** — all in **Python**.
 
 ---
 
@@ -10,79 +10,107 @@ A simple, educational tool that **parses regular expressions (regex)** and visua
 REGEX-TO-NFA-CONVERTER/
 │
 ├── public/
-│   └── nfa_examples.json            # (Optional) Predefined NFA test cases
+│   └── nfa_examples.json                # (Optional) Sample regex test cases
 │
 ├── src/
-│   ├── nfa/
+│   ├── parser/                          # Infix ➤ Postfix parser
 │   │   ├── __init__.py
-│   │   └── Thompson_Converter.py    # NFA builder (Thompson’s construction)
+│   │   └── infix_to_postfix.py
 │   │
-│   ├── parser/
+│   ├── nfa/                             # Thompson NFA builder
 │   │   ├── __init__.py
-│   │   └── infix_to_postfix.py      # Regex parser (infix ➤ postfix)
+│   │   └── Thompson_Converter.py
 │   │
-│   ├── ui/
-│   │   └── visualizer/
-│   │       └── draw_nfa.py          # Graphviz-based visualizer
+│   ├── nfa_to_dfa/                      # DFA converter from NFA
+│   │   ├── __init__.py
+│   │   └── DFA_Converter.py
+│   │
+│   ├── visualizer/                      # Visual rendering using Graphviz
+│   │   ├── draw_nfa.py
+│   │   └── draw_dfa.py
 │
-├── main.py                          # Main entry point to run the pipeline
-├── nfa_graph.png                    # Output visualization (generated)
-├── image.png                        # (Optional) Project diagram
-├── .gitignore
+├── main.py                              # Entry point (regex ➤ NFA ➤ DFA ➤ visualization)
+├── nfa_graph/                           # Folder auto-created to save graphs
 ├── LICENSE
+├── image.png                            # Optional project diagram
 └── README.md
 ```
 
+---
+
 ## 🔄 What This Project Does
 
-### ✅ Full Conversion Pipeline:
-
-1. **Input a regex**
-2. ➤ Insert concatenation (`.`) where needed
-3. ➤ Convert **infix ➤ postfix** (Shunting Yard)
-4. ➤ Generate NFA using **Thompson’s Construction**
-5. ➤ Visualize the NFA as a graph with states & transitions
+### ✅ Complete Regex Processing Pipeline:
+1. Input a valid regex (ex: `a(b|c)*`)
+2. ➤ Convert **infix ➤ postfix** using Shunting Yard Algorithm
+3. ➤ Generate an NFA using **Thompson’s Construction**
+4. ➤ Convert NFA ➤ DFA (Subset Construction)
+5. ➤ Visualize both NFA & DFA using **Graphviz**
+6. ➤ Automatically save PNGs with filenames based on regex
 
 ---
 
-## 🧠 Regex Parsing (Python)
+## 🧠 Regex Parsing
 
 📄 `parser/infix_to_postfix.py`
 
-- Inserts explicit `.` for concatenation
-- Converts user-friendly syntax to machine-friendly postfix
-- Supports:
-  - Grouping `()`
-  - Union `|` or `+`
-  - Kleene Star `*`
-  - Optional `?`
-  - One or more `+`
+- Automatically adds concatenation (`.`)
+- Validates characters: `a-z, A-Z, 0-9, |, *, +, ?, ., (, )`
+- Handles operator precedence:
+  - `*`, `+`, `?` → highest
+  - `.` → middle
+  - `|` → lowest
 
 ---
 
-## 🧱 NFA Construction (Thompson’s Algorithm)
+## 🧱 NFA Construction
 
 📄 `nfa/Thompson_Converter.py`
 
-- Builds an NFA from the postfix expression
-- Represents each state with a `label`, `edge1`, and `edge2`
-- All transitions support epsilon `ε` where needed
+- Creates an NFA using Thompson’s Construction
+- Handles:
+  - Literals
+  - Kleene Star `*`
+  - One-or-more `+`
+  - Optional `?`
+  - Union `|`
+  - Concatenation `.`
+- Transitions include **epsilon (ε)**
 
 ---
 
-## 🖼 NFA Graph Visualization
+## 🔁 DFA Conversion
 
-📄 `visualizer/draw_nfa.py`
+📄 `nfa_to_dfa/DFA_Converter.py`
 
-We use `graphviz` to visually draw your NFA with:
-- Labeled transitions (`a`, `b`, or `ε`)
-- Directed arrows between states
-- Start and Accept states clearly highlighted
+- Converts an NFA to an equivalent DFA
+- Uses **Subset Construction Algorithm**
+- DFA states are labeled and visualized separately
+- Ensures determinism (no ε-transitions, no multiple edges)
 
-### ✅ Example Graph
+---
 
-- Start ➝ `a` ➝ `b` ➝ Accept
-- Loops for `a*`, branches for `a|b`, etc.
+## 🖼 Graph Visualization (NFA + DFA)
+
+📄 `visualizer/draw_nfa.py`, `draw_dfa.py`
+
+- Uses **Graphviz** to create and render:
+  - State diagrams with labels
+  - Directed arrows (`→`)
+  - Loops and branches
+- Accept states are highlighted (double circles)
+- Graphs are auto-opened on generation
+- Output files saved as:
+
+```
+nfa_<regex>.png
+dfa_<regex>.png
+```
+
+Example:
+```
+Regex: a(b|c)* ➤ Saves: nfa_a_b_c_.png & dfa_a_b_c_.png
+```
 
 ---
 
@@ -90,23 +118,27 @@ We use `graphviz` to visually draw your NFA with:
 
 | Component        | Tool/Library              |
 |------------------|---------------------------|
-| Regex Parsing     | Custom Python logic       |
-| NFA Generation    | Thompson’s Algorithm in Python |
-| Graph Visualization | `graphviz` (via Python package) |
-| CLI Interface     | Python's built-in `input()` |
-| (Planned) Web UI  | HTML, JS, Cytoscape.js or D3.js |
+| Regex Parser     | Custom Python             |
+| NFA Generation   | Thompson’s Algorithm      |
+| DFA Conversion   | Subset Construction       |
+| Graph Rendering  | `graphviz` (Python lib)   |
+| CLI Interface    | Python `input()`          |
+| (Planned) Web UI | HTML/JS + Cytoscape       |
 
 ---
 
 ## 🧪 Example Input
 
-```
+```text
 Regex: a(b|c)*d
+
 Prepared Infix: a.(b|c)*.d
 Postfix: a b c | * . d .
 ```
 
-✅ You’ll see a visual NFA graph open with correct transitions and layout!
+✅ Output:
+- `nfa_a_b_c_d_.png`
+- `dfa_a_b_c_d_.png`
 
 ---
 
@@ -115,52 +147,55 @@ Postfix: a b c | * . d .
 ### 1. Clone the Project
 
 ```bash
-git clone https://github.com/your-username/regex-to-nfa-converter.git
+git clone https://github.com/<your-username>/regex-to-nfa-converter.git
 cd regex-to-nfa-converter
 ```
 
-### 2. Install Python Libraries
+### 2. Install Python Requirements
 
 ```bash
 pip install graphviz
 ```
 
-### 3. (Important) Install Graphviz System Package
+### 3. Install Graphviz System Package (required for rendering)
 
-- **Windows:** Download from https://graphviz.org/download/
+- **Windows:** https://graphviz.org/download/  
+  ✅ Add the `bin/` folder to your system PATH
 - **Linux:** `sudo apt install graphviz`
 - **macOS:** `brew install graphviz`
-
-> ✅ Be sure to add Graphviz’s `bin/` to your system PATH so `.render()` works
 
 ---
 
 ## ▶️ How to Run
 
 ```bash
-python main.py
+python src/main.py
 ```
 
-Then input any regex like:
+🔤 Then input your regex when prompted.  
+📁 Output graph files will appear in the working directory.
 
-```
-a(b|c)*d
-```
+---
 
-📸 The program will:
-- Print prepared and postfix form
-- Show a visual **NFA graph**
+## 📝 Notes
+
+- ✅ Graphs use safe filenames based on the input regex
+- ⚠️ Make sure your regex only includes allowed characters
+- Future upgrades will include:
+  - Frontend interface
+  - NFA ➤ DFA table generation
+  - DFA minimization (optional)
 
 ---
 
 ## 📜 License
 
-MIT License (or your preferred one)
+MIT License
 
 ---
 
 ## 👥 Team
 
-> Add your names and student IDs here
+> Add your name(s), student ID(s), and GitHub links here.
 
 ---
