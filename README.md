@@ -117,7 +117,7 @@ You’ll see a **one-page interface** where you can:
 
 - 📄 **Word Document**:  
   You can find the detailed project report in Word format here:  
-  [📥 Download Project Documentation](./Regex-to-NFA .docx) 
+  [📥 Download Project Documentation](./Regex-to-NFA.docx) 
  
 ### 📓 Notion Workspace
 
