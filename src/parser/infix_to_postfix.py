@@ -8,12 +8,12 @@ def validate_regex(expr):
         raise ValueError("❌ Invalid characters in regex. Allowed: a-z, A-Z, 0-9, |, *, +, ?, ., (, )")
     
 def precedence(c):
-    if c == '*':
-        return 3
+    if c in ['*', '+', '?']:
+        return 4
     elif c == '.':
-        return 2
+        return 3
     elif c == '|':
-        return 1
+        return 2
     else:
         return 0
 
@@ -26,10 +26,12 @@ def insert_concat_operators(regex):
         if i + 1 < len(regex):
             next_char = regex[i + 1]
 
-            curr_is_token = curr.isalnum() or curr in ['*', ')']
-            next_is_token = next_char.isalnum() or next_char == '('
+            # Characters that imply end of one operand
+            curr_is_end = curr.isalnum() or curr in ['*', '+', '?', ')']
+            # Characters that imply start of next operand
+            next_is_start = next_char.isalnum() or next_char == '('
 
-            if curr_is_token and next_is_token:
+            if curr_is_end and next_is_start:
                 result += '.'
     return result
 
