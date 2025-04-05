@@ -117,7 +117,7 @@ You’ll see a **one-page interface** where you can:
 
 - 📄 **Word Document**:  
   You can find the detailed project report in Word format here:  
-  [📥 Download Project Documentation](https://docs.google.com/document/d/1imr08F7N2W_tJXytB0ELDlqsV48kniKs/edit?usp=sharing&ouid=118282924025328586317&rtpof=true&sd=true) 
+  [📥 Download Project Documentation](https://drive.google.com/file/d/1YFYTQ-ijZTn2CsaCHm9onI1UBd0JiZT0/view?usp=sharing) 
  
 ### 📓 Notion Workspace
 
