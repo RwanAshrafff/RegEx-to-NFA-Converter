@@ -110,14 +110,14 @@ You’ll see a **one-page interface** where you can:
 ```
 🔧 Fix: Corrected parser logic for postfix conversion with nested operators
 ```
-
+---
 ## 🧾 Additional Resources
 
 ### 📘 Project Documentation
 
 - 📄 **Word Document**:  
   You can find the detailed project report in Word format here:  
-  [📥 Download Project Documentation](./public/Regex-to-NFA.docx)  
+  [📥 Download Project Documentation](./Regex-to-NFA.docx)  
  
 ### 📓 Notion Workspace
 
@@ -125,7 +125,6 @@ You’ll see a **one-page interface** where you can:
   Explore our team notes, planning, and additional resources here:  
   [🔗 Open Notion Workspace](https://furtive-dietician-ff7.notion.site/REGEX-TO-NFA-Converter-1c81adc35e658074ba47c8100a938a9e)
 
----
 ---
 
 ## 📜 License
