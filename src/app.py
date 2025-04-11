@@ -97,7 +97,7 @@ def index():
 def convert():
     try:
         data = request.get_json()
-        regex = data['regex']
+        regex = data['regex'].replace(' ', '')
         
         prepared = insert_concat_operators(regex)
         postfix = infix_to_postfix(prepared)
