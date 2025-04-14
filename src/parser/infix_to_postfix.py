@@ -2,7 +2,7 @@
 import re
 
 def validate_regex(expr):
-    # Allow only: a-z A-Z 0-9 | * + ? ( ) and whitespace
+    
     pattern = r"^[a-zA-Z0-9|*+?.() ]*$"
     if not re.fullmatch(pattern, expr):
         raise ValueError("❌ Invalid characters in regex. Allowed: a-z, A-Z, 0-9, |, *, +, ?, ., (, )")
@@ -25,10 +25,9 @@ def insert_concat_operators(regex):
 
         if i + 1 < len(regex):
             next_char = regex[i + 1]
-
-            # Characters that imply end of one operand
+            
             curr_is_end = curr.isalnum() or curr in ['*', '+', '?', ')']
-            # Characters that imply start of next operand
+            
             next_is_start = next_char.isalnum() or next_char == '('
 
             if curr_is_end and next_is_start:
@@ -50,7 +49,7 @@ def infix_to_postfix(expr):
         elif c == ')':
             while op_stack and op_stack[-1] != '(':
                 postfix += op_stack.pop() + ' '
-            if op_stack: op_stack.pop()  # remove '('
+            if op_stack: op_stack.pop() 
         else:
             while op_stack and precedence(c) <= precedence(op_stack[-1]):
                 postfix += op_stack.pop() + ' '

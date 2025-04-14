@@ -1,0 +1,17 @@
+digraph {
+	rankdir=LR
+	S0 -> S1 [label="ε"]
+	S0 -> S2 [label="ε"]
+	S2 -> S3 [label="ε"]
+	S3 -> S4 [label=b]
+	S1 -> S5 [label=a]
+	S5 -> S2 [label="ε"]
+	S0 [shape=circle]
+	S1 [shape=circle]
+	S2 [shape=circle]
+	S3 [shape=circle]
+	S4 [shape=doublecircle]
+	S5 [shape=circle]
+	start [shape=point]
+	start -> S0 [label=start]
+}

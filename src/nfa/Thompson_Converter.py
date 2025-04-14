@@ -1,4 +1,3 @@
-# Define your state and NFA classes first
 class state:
     def __init__(self):
         self.label = None
@@ -10,7 +9,7 @@ class nfa:
         self.initial = initial
         self.accept = accept
 
-# NFA Builder using Thompson's Construction
+
 def compile(postfix):
     nfaStack = []
 
