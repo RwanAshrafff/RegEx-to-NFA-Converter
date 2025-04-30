@@ -135,7 +135,12 @@ def serve_graph(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == '__main__':
+    import os
+
     os.makedirs('visualizer/static/graphs', exist_ok=True)
     os.makedirs('visualizer/static/css', exist_ok=True)
     os.makedirs('visualizer/static/js', exist_ok=True)
-    app.run(debug=True)
+
+    port = int(os.environ.get("PORT", 5000))
+
+    app.run(debug=False, host='0.0.0.0', port=port)

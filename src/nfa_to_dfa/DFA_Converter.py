@@ -55,13 +55,10 @@ def nfa_to_dfa(nfa):
         for symbol in symbols:
             
             next_nfa_states = move(current_dfa_state.states, symbol)
-            
-            
             next_nfa_states_closure = set()
             for state in next_nfa_states:
                 next_nfa_states_closure.update(epsilon_closure(state))
-            
-            
+        
             existing_state = None
             for dfa_state in dfa.states:
                 if dfa_state.states == next_nfa_states_closure:
@@ -79,5 +76,4 @@ def nfa_to_dfa(nfa):
                 current_dfa_state.transitions[symbol] = new_dfa_state
             else:
                 current_dfa_state.transitions[symbol] = existing_state
-    
     return dfa 
