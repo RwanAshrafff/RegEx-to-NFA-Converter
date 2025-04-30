@@ -141,4 +141,4 @@ MIT License ©
 | Rwan Ashraf      | 221001757   | [RwanAshrafff](https://github.com/RwanAshrafff)  
 | Sherif Ahmed     | 221001968   | [Sherif-ahmed177](https://github.com/Sherif-ahmed177)  
 | Merna Samir      | 221002000   | [mernasamir2200](https://github.com/mernasamir2200)  
-| Zynab Essam      | 221001623   | [Zay-nabb](https://github.com/Zay-nabb)  
+| Zaynab Essam      | 221001623   | [Zay-nabb](https://github.com/Zay-nabb)  
